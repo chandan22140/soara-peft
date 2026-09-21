@@ -9,6 +9,12 @@
 </p>
 
 <p align="center">
+  <strong>Chandan Sah</strong>, <strong>Vinayak Abrol</strong>, <strong>Anubha Gupta</strong><br>
+  <em>Indraprastha Institute of Information Technology Delhi (IIIT-Delhi)</em><br>
+  <code>{chandan22140, abrol, anubha}@iiitd.ac.in</code>
+</p>
+
+<p align="center">
   <a href="https://jmlr.org/tmlr/"><img src="https://img.shields.io/badge/Published-TMLR-blue.svg" alt="TMLR"></a>
   <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="Python 3.9+"></a>
   <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg" alt="PyTorch"></a>
@@ -199,10 +205,10 @@ If you find SOARA useful in your research, please cite our paper:
 ```bibtex
 @article{soara2025,
   title={One Spin at a Time: Sequential Subspace Rotations for Parameter-Efficient Fine-Tuning},
-  author={Chandan},
+  author={Sah, Chandan and Abrol, Vinayak and Gupta, Anubha},
   journal={Transactions on Machine Learning Research (TMLR)},
-  year={2025},
-  url={https://openreview.net/forum?id=XXXX}
+  year={2026},
+  url={https://openreview.net/forum?id=gvh5FQXr9w}
 }
 ```
 
