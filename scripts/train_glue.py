@@ -42,7 +42,7 @@ from scipy.stats import spearmanr, pearsonr
 from sklearn.metrics import matthews_corrcoef, f1_score, accuracy_score
 
 # Import SOARA modules
-from rotational_pissa_unified import (
+from soara import (
     SOARAConfig,
     SOARALinearLayer,
     replace_linear_with_soara,

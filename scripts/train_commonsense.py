@@ -11,7 +11,7 @@ import wandb
 
 os.environ["HF_DATASETS_TRUST_REMOTE_CODE"] = "1"
 
-from rotational_pissa_unified import (
+from soara import (
     SOARAConfig,
     replace_linear_with_soara,
 )

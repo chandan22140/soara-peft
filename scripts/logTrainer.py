@@ -14,7 +14,7 @@ from transformers.trainer import (
 )
 # CHANGED: Import SOARA layer instead of PEFT LoraLinear
 # from peft.tuners.lora.layer import Linear as LoraLinear
-from rotational_pissa_unified import SOARALinearLayer
+from soara import SOARALinearLayer
 
 # include_keywords = ["block.0", "block.4"]
 include_keywords = ["encoder.block.2", "encoder.block.3", "encoder.block.4"]  # for T5

@@ -103,7 +103,7 @@ class LocalCIFARDataset(Dataset):
         return image, int(self.targets[index])
 
 # Import our SOARA modules
-from rotational_pissa_unified import (
+from soara import (
     SOARAConfig,
     SOARALinearLayer,
     replace_linear_with_soara,
@@ -1764,7 +1764,7 @@ class ViTRotationalTrainer:
         Returns:
             Average ||R^T R - I||_F across all adapted layers.
         """
-        from rotational_pissa_unified import SOARALinearLayer
+        from soara import SOARALinearLayer
         
         deviations = []
         with torch.no_grad():

@@ -10,7 +10,6 @@
 
 <p align="center">
   <a href="https://jmlr.org/tmlr/"><img src="https://img.shields.io/badge/Published-TMLR-blue.svg" alt="TMLR"></a>
-  <a href="https://arxiv.org/abs/XXXX.XXXXX"><img src="https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b.svg" alt="arXiv"></a>
   <a href="https://www.python.org/downloads/"><img src="https://img.shields.io/badge/python-3.9+-blue.svg" alt="Python 3.9+"></a>
   <a href="https://pytorch.org/"><img src="https://img.shields.io/badge/PyTorch-2.0+-ee4c2c.svg" alt="PyTorch"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache_2.0-green.svg" alt="License"></a>
@@ -28,28 +27,7 @@ $$W' = U \cdot R_U \cdot \Sigma_{\text{train}} \cdot R_V^\top \cdot V^\top$$
 
 where $R_U, R_V$ are learnable rotation matrices and $\Sigma_{\text{train}}$ is a trainable diagonal matrix initialized from the leading singular values. This preserves the orthogonality of the pretrained basis while aligning it with downstream task geometry.
 
-### Key Results
 
-| Benchmark | Model | SOARA Accuracy | vs. Full FT | Params |
-|---|---|---|---|---|
-| **CIFAR-100** | ViT-B/16 | **92.32%** | +0.0 pp (surpasses FFT) | 129K (670× fewer) |
-| **GLUE (avg)** | DeBERTa-v3 | **89.70%** | −0.2 pp | 0.59M (50% fewer than SVFT) |
-| **GSM8K** | Gemma-7B | **76.50%** | +1.8 pp (surpasses FFT) | 6.45M (25% of PiSSA) |
-| **Commonsense (avg)** | Llama-3-8B | **86.79%** | — | 1.44M |
-
----
-
-## Method Variants
-
-SOARA provides three parameterizations for the rotation matrices, offering different trade-offs between parameter count and exact orthogonality:
-
-| Variant | Parameterization | Orthogonality | Params per Layer | Best For |
-|---|---|---|---|---|
-| **SOARA-V1** | Dense $R_U, R_V$ with regularization | Soft (via $\lambda\|R^\top R - I\|_F^2$) | $2r^2 + r$ | Moderate-rank regimes |
-| **SOARA-V2a** | Sequential Givens rotations | Exact | $r/2$ per phase | Ultra-low parameter budgets |
-| **SOARA-V2b** | Butterfly factorizations | Exact | $O(r \log r)$ | Best accuracy-parameter trade-off |
-
----
 
 ## Quick Start
 
@@ -128,43 +106,7 @@ class SOARAConfig:
 
 ---
 
-## Experimental Results
 
-### Vision Benchmark (ViT-B/16)
-
-SOARA-V2b achieves **72.47% mean accuracy** across 5 datasets — surpassing full fine-tuning (72.12%) with **670× fewer parameters**.
-
-| Method | # Params | CIFAR-100 | DTD | SUN397 | FER2013 | FGVC | Avg |
-|---|---|---|---|---|---|---|---|
-| Full Fine-tuning | 86.6M | 92.4 | 72.4 | 75.0 | 68.2 | 52.6 | 72.12 |
-| LoRA | 220K | 90.6 | 70.4 | 73.6 | 62.7 | 54.9 | 70.44 |
-| **SOARA-V2b** | **129K** | **92.32** | **74.10** | 73.65 | 62.90 | **59.38** | **72.47** |
-| SOARA-V1 (r=16) | 38K | 90.68 | 72.30 | 73.90 | 64.78 | 52.63 | 70.86 |
-| SOARA-V2a (r=16) | 2.3K | 89.11 | 71.49 | 67.69 | 60.11 | 49.96 | 67.67 |
-
-### GLUE Benchmark (DeBERTa-v3-base)
-
-| Method | # Params | MNLI | SST-2 | MRPC | CoLA | QNLI | QQP | RTE | STS-B |
-|---|---|---|---|---|---|---|---|---|---|
-| Full FT | 184M | 89.90 | 95.63 | 89.46 | 69.19 | 94.03 | 92.40 | 83.75 | 91.60 |
-| LoRA (r=8) | 1.33M | 90.65 | 94.95 | 89.95 | 69.82 | 93.87 | 91.99 | 85.20 | 91.60 |
-| PiSSA (r=8) | 1.33M | 90.37 | 96.22 | 91.50 | 73.12 | 94.43 | 92.33 | 88.69 | 92.00 |
-| **SOARA-V1 (r=64)** | **0.59M** | 89.85 | 95.76 | **93.60** | 73.11 | 94.03 | 91.11 | **88.81** | 91.30 |
-| **SOARA-V2b** | **0.129M** | 89.31 | 95.41 | 92.85 | 73.10 | 93.63 | 89.39 | 86.28 | **92.02** |
-
-### GSM8K Mathematical Reasoning
-
-| Method | # Params | Peak GPU (GB) | GSM8K (%) |
-|---|---|---|---|
-| Full-FT | 8.5B | — | 74.67 |
-| LoRA (r=32) | 68.8M | — | 76.57 |
-| PiSSA (r=8) | 25M | — | **77.78** |
-| **SOARA-V1 (r=128)** | **6.45M** | — | 76.50 |
-| **SOARA-V2b** | **1.40M** | **38.47** | 76.09 |
-
-> SOARA-V2b achieves comparable accuracy to SVFT-R (76.81%) while using **only 7.1%** of its parameter footprint and **half the GPU memory** (38.5 GB vs 77 GB).
-
----
 
 ## Figures
 
@@ -257,7 +199,7 @@ If you find SOARA useful in your research, please cite our paper:
 ```bibtex
 @article{soara2025,
   title={One Spin at a Time: Sequential Subspace Rotations for Parameter-Efficient Fine-Tuning},
-  author={[Author Names]},
+  author={Chandan},
   journal={Transactions on Machine Learning Research (TMLR)},
   year={2025},
   url={https://openreview.net/forum?id=XXXX}

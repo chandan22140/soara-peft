@@ -1,7 +1,7 @@
 from fire import Fire
 # CHANGED: Import SOARA instead of PEFT
 # from peft import PeftModel
-from rotational_pissa_unified import replace_linear_with_soara, SOARAConfig
+from soara import replace_linear_with_soara, SOARAConfig
 from utils import initialize_text_to_text_model
 import os
 import torch
@@ -149,7 +149,7 @@ def process_layer_merge_task(layer_prefix, checkpoint_state_dict, soara_config, 
         # Givens angles present - need to compute rotation matrix from angles
         # This is rare since step_phase() merges rotations into U/V
         # But we support it for completeness
-        from rotational_pissa_unified import GivensRotationLayer, generate_givens_pairings
+        from soara import GivensRotationLayer, generate_givens_pairings
         
         thetas_u = checkpoint_state_dict[givens_u_key]
         thetas_v = checkpoint_state_dict[givens_v_key]
@@ -183,7 +183,7 @@ def process_layer_merge_task(layer_prefix, checkpoint_state_dict, soara_config, 
             logs.append(f"  Using rotation method: identity (V2 with rotations merged into U/V)")
     
     # Compute scaling
-    # NOTE: In rotational_pissa_unified.py line 497, scaling = 1 (lora_alpha/r is commented out)
+    # NOTE: In soara/soara_layer.py line 497, scaling = 1 (lora_alpha/r is commented out)
     # So we use 1.0 here, not lora_alpha / r
     scaling = 1.0
     
@@ -205,7 +205,7 @@ def process_layer_merge_task(layer_prefix, checkpoint_state_dict, soara_config, 
         W_principal = U_dev @ middle @ V_dev  # [out_features, in_features]
         
         # Merge: W_merged = W_residual + scaling * W_principal
-        # Note: In the training code, scaling = 1 (see line 497 in rotational_pissa_unified.py)
+        # Note: In the training code, scaling = 1 (see line 497 in soara/soara_layer.py)
         # The lora_alpha/r scaling is commented out
         # Move result back to CPU (or same device as residual) for addition to avoid OOM on GPU if holding full model
         
