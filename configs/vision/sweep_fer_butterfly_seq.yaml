@@ -1,0 +1,53 @@
+program: train_vit_rotational.py
+method: bayes  
+project: PiSSA-fer-butterfly-seq
+metric:
+  name: best_accuracy
+  goal: maximize
+
+parameters:
+  model:
+    value: google/vit-base-patch16-224
+  
+  dataset:
+    value: "fer2013"
+  
+  learning-rate:
+    min: 0.0001
+    max: 0.002
+    distribution: log_uniform_values
+  
+  weight-decay:
+    min: 0.01
+    max: 0.1
+    distribution: log_uniform_values
+  
+  lr-ratio-s:
+    value: 10.0
+    
+
+  total-cycles:
+    values: [3]
+
+  lora-dropout:
+    values: [0.05, 0.1]
+
+  rank:
+    values: [768]
+  
+  method:
+    value: v2
+  
+  epochs:
+    value: 10
+  
+  batch-size:
+    values: [32]
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - ${args}
+  - --use-butterfly    
+  - --butterfly-sequential

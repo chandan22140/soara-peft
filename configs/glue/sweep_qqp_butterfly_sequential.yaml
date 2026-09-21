@@ -1,0 +1,40 @@
+program: train_glue_deberta.py
+method: bayes
+project: glue-deberta-qqp-butterfly-sequential
+metric:
+  name: best_metric
+  goal: maximize
+
+parameters:
+  task:
+    value: qqp
+  
+  method:
+    value: v2
+  
+  rank:
+    value: 768
+
+  lr:
+    distribution: log_uniform_values
+    min: 0.001
+    max: 0.05
+  
+  epochs:
+    value: 19
+  
+  weight_decay:
+    min: 0.0001
+    max: 0.01
+    distribution: log_uniform_values
+
+  batch-size:
+    value: 32
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - ${args}
+  - --use-butterfly
+  - --butterfly-sequential

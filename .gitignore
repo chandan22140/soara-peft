@@ -1,0 +1,50 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+*.egg
+
+# Environment
+.env
+.venv
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Training outputs
+outputs/
+results/
+logs/
+wandb/
+*.log
+
+# Data (users download their own)
+data/
+
+# Checkpoints
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+# Misc
+*.csv
+*.tsv
+__pycache__/

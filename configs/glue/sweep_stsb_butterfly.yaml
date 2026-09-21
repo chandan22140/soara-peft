@@ -1,0 +1,39 @@
+program: train_glue_deberta.py
+method: bayes
+project: glue-deberta-stsb-butterfly
+metric:
+  name: best_metric
+  goal: maximize
+
+parameters:
+  task:
+    value: stsb
+  
+  method:
+    value: v2
+  
+  rank:
+    value: 768
+
+  lr:
+    distribution: log_uniform_values
+    min: 1e-4
+    max: 1e-3
+  
+  epochs:
+    value: 14
+  
+  weight_decay:
+    min: 0.00001
+    max: 0.01
+    distribution: log_uniform_values
+
+  batch-size:
+    value: 32
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - ${args}
+  - --use-butterfly

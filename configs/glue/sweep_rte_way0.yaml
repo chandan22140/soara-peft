@@ -1,0 +1,45 @@
+program: train_glue_deberta.py
+method: bayes
+project: glue-deberta-rte
+metric:
+  name: best_metric
+  goal: maximize
+
+parameters:
+  task:
+    value: rte
+  
+  method:
+    values: ["v1"]
+  
+  rank:
+    values: [85]
+  
+  lr:
+    distribution: log_uniform_values
+    min: 7e-5
+    max: 1e-3
+
+  epochs:
+    value: 50
+  
+  # 3. Orthogonality weight 
+  orthogonality_weight:
+    min: 0.001
+    max: 0.05
+    distribution: uniform
+  # 4. Weight decay 
+  weight_decay:
+    min: 0.0001
+    max: 0.01
+    distribution: log_uniform_values
+      
+  batch-size:
+    values: [32]  
+
+
+command:
+  - ${env}
+  - python
+  - ${program}
+  - ${args}
