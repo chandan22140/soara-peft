@@ -116,21 +116,37 @@ class SOARAConfig:
 
 ## Figures
 
-### Learning Rate Sensitivity
+### t-SNE Cluster Visualization
 
-SOARA-V2b demonstrates stable performance across learning rates, competitive with LoRA, PiSSA, and BOFT:
+SOARA produces clean, well-separated class clusters in intermediate ViT representations (FGVC Aircraft):
 
-<p align="center">
-  <img src="images/lr_sweep_curves.png" alt="Learning Rate Sensitivity" width="600"/>
-</p>
-
-### Rotational Alignment vs. Direct Parameterization
-
-V1-soft consistently outperforms unstructured DMP across all learning rates, confirming the benefit of the orthogonal inductive bias:
-
-<p align="center">
-  <img src="images/e1_accuracy_vs_lr.png" alt="DMP vs V1-soft" width="600"/>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="images/tsne_way0_ablation_way0_r2.png" alt="r=2" width="300"/><br>
+      <b>(a) SOARA-V1 (r=2)</b>
+    </td>
+    <td align="center">
+      <img src="images/tsne_way0_ablation_way0_r4.png" alt="r=4" width="300"/><br>
+      <b>(b) SOARA-V1 (r=4)</b>
+    </td>
+    <td align="center">
+      <img src="images/tsne_way0_ablation_way0_r8.png" alt="r=8" width="300"/><br>
+      <b>(c) SOARA-V1 (r=8)</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="images/tsne_way0_ablation_way0_r16.png" alt="r=16" width="300"/><br>
+      <b>(d) SOARA-V1 (r=16)</b>
+    </td>
+    <td align="center">
+      <img src="images/tsne_way1_ablation_way1_bf_seq.png" alt="V2b" width="300"/><br>
+      <b>(e) SOARA-V2b</b>
+    </td>
+    <td></td>
+  </tr>
+</table>
 
 ### Convergence Analysis
 
