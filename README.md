@@ -134,19 +134,35 @@ V1-soft consistently outperforms unstructured DMP across all learning rates, con
 
 ### Convergence Analysis
 
-Rank ablation on CIFAR-100 — increasing rank from $r=2$ to $r=16$ accelerates convergence with diminishing returns beyond $r=8$:
+Increasing rank from $r=2$ to $r=16$ accelerates convergence with diminishing returns beyond $r=8$ across multiple datasets:
 
-<p align="center">
-  <img src="images/convergence_cifar100.png" alt="Convergence Analysis" width="450"/>
-</p>
-
-### t-SNE Cluster Visualization
-
-SOARA-V2b produces clean, well-separated class clusters in intermediate ViT representations (FGVC Aircraft):
-
-<p align="center">
-  <img src="images/tsne_way1_ablation_way1_bf_seq.png" alt="t-SNE Visualization" width="450"/>
-</p>
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="images/convergence_cifar100.png" alt="CIFAR-100" width="300"/><br>
+      <b>(a) CIFAR-100</b>
+    </td>
+    <td align="center">
+      <img src="images/convergence_dtd.png" alt="DTD" width="300"/><br>
+      <b>(b) DTD</b>
+    </td>
+    <td align="center">
+      <img src="images/convergence_fer2013.png" alt="FER2013" width="300"/><br>
+      <b>(c) FER2013</b>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="images/convergence_fgvc_aircraft.png" alt="FGVC Aircraft" width="300"/><br>
+      <b>(d) FGVC Aircraft</b>
+    </td>
+    <td align="center">
+      <img src="images/convergence_sun397.png" alt="SUN397" width="300"/><br>
+      <b>(e) SUN397</b>
+    </td>
+    <td></td>
+  </tr>
+</table>
 
 ---
 
