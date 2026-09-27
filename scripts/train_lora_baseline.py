@@ -203,6 +203,8 @@ def setup_model_and_tokenizer(model_name, lora_rank, lora_alpha, lora_dropout):
     )
     
     model = get_peft_model(model, lora_config)
+    if hasattr(model, "enable_input_require_grads"):
+        model.enable_input_require_grads()
     
     # Print trainable params
     trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)

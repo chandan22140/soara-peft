@@ -151,6 +151,7 @@ def prep_dataset(task: str):
 
 def main(
     task="boolq", 
+    model_id="meta-llama/Meta-Llama-3-8B",
     lora_alpha=128, 
     lora_rank=None, 
     sample_size=128, 
@@ -169,7 +170,6 @@ def main(
     s_lr_multiplier=10.0,
 ):
     accelerator = Accelerator()
-    model_id = "meta-llama/Meta-Llama-3-8B" 
     model_type = "CausalLM"
     model_dtype = "bf16"
 
@@ -201,7 +201,7 @@ def main(
     if accelerator.is_local_main_process:
         wandb.init(
             name=wandb_name,
-            mode="online",
+            mode=os.environ.get("WANDB_MODE", "online"),
             group="commonsense_tuning",
             project="LLaMA SOARA Commonsense",
         )

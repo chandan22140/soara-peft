@@ -21,7 +21,21 @@ Variants:
     - **SOARA-V2b**: Exact orthogonality via butterfly factorizations
 """
 
-from .soara_layer import SOARAConfig, SOARALinearLayer, replace_linear_with_soara
+from .soara_layer import (
+    SOARAConfig,
+    SOARALinearLayer,
+    replace_linear_with_soara,
+    SOARATrainer,
+    GivensRotationLayer,
+    generate_givens_pairings,
+)
 
 __version__ = "0.1.0"
-__all__ = ["SOARAConfig", "SOARALinearLayer", "replace_linear_with_soara"]
+__all__ = [
+    "SOARAConfig",
+    "SOARALinearLayer",
+    "replace_linear_with_soara",
+    "SOARATrainer",
+    "GivensRotationLayer",
+    "generate_givens_pairings",
+]
